@@ -4,27 +4,27 @@ import java.util.Scanner;
 
 public class Calculadora {
 
-    public int somar(int num1, int num2){
+    public double somar(int num1, int num2){
 
         return num1 + num2;
 
     }
 
-    public int subtrair(int num1, int num2){
+    public double subtrair(int num1, int num2){
 
         return num1 - num2;
 
     }
 
-    public int multiplicar(int num1, int num2){
+    public double multiplicar(int num1, int num2){
 
         return num1 * num2;
 
     }
 
-    public int dividir(int num1, int num2){
+    public double dividir(int num1, int num2){
 
-        return num1 / num2;
+        return (double) num1 / num2;
 
     }
 
@@ -33,7 +33,7 @@ public class Calculadora {
         Scanner sc = new Scanner(System.in);
 
         int op = 0;
-        var resultado = 0;
+        double resultado = 0;
         String simbolo = "";
 
         while (true) {
@@ -80,7 +80,7 @@ public class Calculadora {
             }
 
             System.out.println("===============");
-            System.out.printf("O resultado foi de %d %s %d = %d\n", num1, simbolo, num2, resultado);
+            System.out.printf("O resultado foi de %d %s %d = %.1f%n\n", num1, simbolo, num2, resultado);
             System.out.println("Aberte 'enter' para continuar ....");
             sc.nextLine();
             sc.nextLine();
