@@ -95,6 +95,7 @@ public class Atividade5 {
             if (removerAcento(comida.getNome()).equalsIgnoreCase(nomeComidaFormatadaParaRemover)){
                 nomesComidasEscolhidas.remove(comida.getNome());
                 valorTotal -= comida.getValor();
+                break;
 
             }
         }
