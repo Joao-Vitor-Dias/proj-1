@@ -19,6 +19,7 @@ public class Atividade5 {
         comidasLoja.put(2,new Comida("Hambúrguer", 20.0));
         comidasLoja.put(3,new Comida("Salada", 15.0));
         comidasLoja.put(4,new Comida("Suco", 8.0));
+        comidasLoja.put(5,new Comida("Chocolate", 4.0));
 
     }
 
@@ -35,12 +36,7 @@ public class Atividade5 {
 
             while (querAdicionarComida){
 
-                System.out.println("=== Cardápio ===");
-
-                System.out.println("1 - Pizza R$ 30.0");
-                System.out.println("2 - Hambúrguer R$ 20.0");
-                System.out.println("3 - Salada R$ 15.0");
-                System.out.println("4 - Suco R$ 8.0");
+                exibirCardapio();
 
                 System.out.println("Selecione oque deseja: ");
                 int op = sc.nextInt();
@@ -101,6 +97,21 @@ public class Atividade5 {
                 valorTotal -= comida.getValor();
 
             }
+        }
+
+    }
+
+    public static void exibirCardapio(){
+
+        System.out.println("=== Cardápio ===");
+
+        int cont = 1;
+
+        for (Comida comida : comidasLoja.values()){
+
+            System.out.printf("%d - %s R$ %.2f%n",cont, comida.getNome(), comida.getValor());
+            cont++;
+
         }
 
     }
