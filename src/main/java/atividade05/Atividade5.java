@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Atividade5 {
 
@@ -21,11 +22,12 @@ public class Atividade5 {
 
     }
 
+    static double valorTotal = 0;
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         List<String> comidasEscolhidas = new ArrayList<>();
-        double valorTotal = 0;
         boolean querAdicionarComida = true;
         boolean querContinuarParaPagamento = false;
 
@@ -61,26 +63,16 @@ public class Atividade5 {
             if (escolhaContinuar.equalsIgnoreCase("s")){
                 querContinuarParaPagamento = true;
             }else {
-                System.out.println("Deseja cancelar o pedido? s/n");
-                String removerPedido = sc.next();
-                if (removerPedido.equalsIgnoreCase("s")){
+
+                System.out.println("Deseja Cancelar o pedido ou Remover algo da lista? c/r ");
+                String removerCancelarPedido = sc.next();
+                if (removerCancelarPedido.equalsIgnoreCase("c")){
                     System.exit(0);
                 }else {
                     System.out.println("Oque deseja remover da Lista? ");
                     System.out.println(comidasEscolhidas);
                     String nomeComidaRemover = sc.next();
-                    String nomeComidaRemoverFormatada = removerAcento(nomeComidaRemover);
-
-                    for(Comida comida: comidasLoja.values()){
-
-                        if (comida.getNome().equalsIgnoreCase(nomeComidaRemoverFormatada)){
-                            comidasEscolhidas.remove(comida.getNome());
-                            valorTotal -= comida.getValor();
-                            break;
-                        }
-
-                    }
-
+                    removerItemLista(comidasEscolhidas,nomeComidaRemover);
                 }
 
             }
@@ -94,7 +86,23 @@ public class Atividade5 {
     }
 
     public static String removerAcento(String str){
-        return Normalizer.normalize(str, Normalizer.Form.NFD).replace("[^\\p{ASCII}]", "");
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
+
+    public static void removerItemLista(List<String> nomesComidasEscolhidas, String nomeComida){
+
+        String nomeComidaFormatadaParaRemover = removerAcento(nomeComida);
+
+        for (Comida comida: comidasLoja.values()){
+            if (removerAcento(comida.getNome()).equalsIgnoreCase(nomeComidaFormatadaParaRemover)){
+                nomesComidasEscolhidas.remove(comida.getNome());
+                valorTotal -= comida.getValor();
+
+            }
+        }
+
     }
 
 }
